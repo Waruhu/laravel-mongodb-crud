@@ -46,6 +46,7 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $book = new Book;
+        $book->_id =  $request->input('id');
         $book->title =  $request->input('title');
         $book->isbn =  $request->input('isbn');
         $book->author =  $request->input('author');

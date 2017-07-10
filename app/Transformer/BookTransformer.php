@@ -12,12 +12,12 @@ class BookTransformer extends TransformerAbstract
 	    return [
 	        'id'      => $book['_id'],
             'title'   => $book['title'],
-            'isbn'    => (int) $book['isbn'],
+            'isbn'    => $book['isbn'],
             'author'  => [
 				'name'  => $book['author'],
 				'email' => $book['author'] .'@gmail.com',
             ],
-            'category'    => (int) $book['category'],
+            'category'    =>$book['category'],
 	    ];
 	}
 }
