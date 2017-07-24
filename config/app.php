@@ -179,6 +179,12 @@ return [
         App\Providers\RouteServiceProvider::class,
         Spatie\Fractal\FractalServiceProvider::class,
 
+        // the Scout package itself
+        Laravel\Scout\ScoutServiceProvider::class,
+
+        // the driver for Elasticsearch
+        ScoutElastic\ScoutElasticServiceProvider::class,
+
     ],
 
     /*

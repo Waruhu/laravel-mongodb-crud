@@ -9,7 +9,8 @@
         "jenssegers/mongodb": "^3.2",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
-        "spatie/laravel-fractal": "^4.01"
+        "spatie/laravel-fractal": "^4.01",
+        "babenkoivan/scout-elasticsearch-driver": "^1.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
