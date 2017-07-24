@@ -162,6 +162,8 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Illuminate\Html\HtmlServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
         Jenssegers\Mongodb\MongodbServiceProvider::class,
 
         /*
@@ -180,10 +182,12 @@ return [
         Spatie\Fractal\FractalServiceProvider::class,
 
         // the Scout package itself
-        Laravel\Scout\ScoutServiceProvider::class,
+        // Laravel\Scout\ScoutServiceProvider::class,
 
         // the driver for Elasticsearch
-        ScoutElastic\ScoutElasticServiceProvider::class,
+        // ScoutElastic\ScoutElasticServiceProvider::class,
+
+        Elasticquent\ElasticquentServiceProvider::class,
 
     ],
 
@@ -233,6 +237,12 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Es' => Elasticquent\ElasticquentElasticsearchFacade::class,
+        'Form' => Illuminate\Html\FormFacade::class,
+        'Html' => Illuminate\Html\HtmlFacade::class,
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
+        'Input' => Illuminate\Support\Facades\Input::class,
 
     ],
 
