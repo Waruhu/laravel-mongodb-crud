@@ -1272,16 +1272,16 @@
         },
         {
             "name": "spatie/fractalistic",
-            "version": "2.3.1",
+            "version": "2.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/fractalistic.git",
-                "reference": "2bba98fd266d4691395904be6d981bd09150802f"
+                "reference": "012c4182203ba9127bb0a31cec3c211ce68227d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/fractalistic/zipball/2bba98fd266d4691395904be6d981bd09150802f",
-                "reference": "2bba98fd266d4691395904be6d981bd09150802f",
+                "url": "https://api.github.com/repos/spatie/fractalistic/zipball/012c4182203ba9127bb0a31cec3c211ce68227d9",
+                "reference": "012c4182203ba9127bb0a31cec3c211ce68227d9",
                 "shasum": ""
             },
             "require": {
@@ -1319,20 +1319,20 @@
                 "spatie",
                 "transform"
             ],
-            "time": "2017-07-21T23:08:30+00:00"
+            "time": "2017-07-24T08:06:12+00:00"
         },
         {
             "name": "spatie/laravel-fractal",
-            "version": "4.2.0",
+            "version": "4.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-fractal.git",
-                "reference": "c28e773d1bd68a0cc1b607e1b65ac276f465880e"
+                "reference": "a3598933f15f74edcb44edb3ff3e0afa23663907"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-fractal/zipball/c28e773d1bd68a0cc1b607e1b65ac276f465880e",
-                "reference": "c28e773d1bd68a0cc1b607e1b65ac276f465880e",
+                "url": "https://api.github.com/repos/spatie/laravel-fractal/zipball/a3598933f15f74edcb44edb3ff3e0afa23663907",
+                "reference": "a3598933f15f74edcb44edb3ff3e0afa23663907",
                 "shasum": ""
             },
             "require": {
@@ -1387,7 +1387,7 @@
                 "spatie",
                 "transform"
             ],
-            "time": "2017-07-18T07:28:13+00:00"
+            "time": "2017-07-26T14:15:40+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

@@ -1,5 +1,6 @@
 <?php
 use App\Book;
+use App\vehicle;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,3 +36,7 @@ Route::get('/elasticsearch', ['as' => 'search', 'uses' => function() {
   return View::make('elasticquent/bookindex', compact('books'));
 
 }]);
+
+Route::get('/search', function(){
+    return view('search', ['vehicles'=>vehicle::all()]);
+});
