@@ -56,7 +56,10 @@
                                     </ul>
                                     <p>{{ $value['description'] }}</p>
                                 @endforeach
+                            @else
+                                <h3 class="text-danger">{{ $error['error'] }}</h3>
                             @endif
+                            
                         </div>
                     </div>
                 </div>

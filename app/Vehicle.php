@@ -46,6 +46,16 @@ class Vehicle extends Eloquent
                         'word_delimiter',
                     ],
                 ],
+                'folding'=>[
+                        'tokenizer' => 'standard',
+                        "filter"=>  [ "lowercase", "asciifolding" ]
+                ],
+            ],
+            'normalizer'=>[
+                'lowerasciinormalizer' => [
+                      'type' => 'custom',
+                       "filter"=>  [ "lowercase", "asciifolding" ]
+                ]
             ],
         ],
     ];
@@ -56,23 +66,22 @@ class Vehicle extends Eloquent
                 'analyzer' => 'default'
         ],
         'model_name' => [
-                'type' => 'string',
-                'analyzer' => 'default'
+                'type' => 'keyword',
+                'normalizer'=> 'lowerasciinormalizer'
         ],
         'model_name_search' => [
                 'type' => 'keyword'
         ],
         'brand_name' => [
-                'type' => 'string',
-                'analyzer' => 'default',
-                "fielddata" => true
+                'type' => 'keyword',
+                'normalizer'=> 'lowerasciinormalizer'
         ],
         'category_body_name' => [
                 'type' => 'keyword'
         ],
         'body_name' => [
-                'type' => 'string',
-                'analyzer' => 'default'
+                'type' => 'keyword',
+                'normalizer'=> 'lowerasciinormalizer'
         ],
         'brand_model' => [
                 'type' => 'keyword'
@@ -87,7 +96,8 @@ class Vehicle extends Eloquent
                 'type' => 'keyword'
         ],
         'city_name' => [
-                'type' => 'keyword'
+                'type' => 'keyword',
+                "normalizer"=> "lowerasciinormalizer"
         ],
         'location_search' => [
                 'type' => 'text'
