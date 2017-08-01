@@ -53,22 +53,26 @@ class Vehicle extends Eloquent
     protected $mappingProperties = [
         'id' => [
                 'type' => 'string',
-                'analyzer' => 'standard'
+                'analyzer' => 'default'
         ],
         'model_name' => [
-                'type' => 'keyword'
+                'type' => 'string',
+                'analyzer' => 'default'
         ],
         'model_name_search' => [
                 'type' => 'keyword'
         ],
         'brand_name' => [
-                'type' => 'keyword'
+                'type' => 'string',
+                'analyzer' => 'default',
+                "fielddata" => true
         ],
         'category_body_name' => [
                 'type' => 'keyword'
         ],
         'body_name' => [
-                'type' => 'keyword'
+                'type' => 'string',
+                'analyzer' => 'default'
         ],
         'brand_model' => [
                 'type' => 'keyword'
@@ -163,7 +167,7 @@ class Vehicle extends Eloquent
             'model_name'     => $this->model,
             'model_name_search'     => $this->model,
             'brand_name'     => $this->brand,
-            'body_name'     => $this->brand_model,
+            'body_name'     => $this->body_name,
             'brand_model'     => $this->brand_model,
         );
     }

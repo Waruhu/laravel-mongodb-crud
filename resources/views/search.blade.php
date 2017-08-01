@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <title>Search with Laravel Scout and Vue.js!</title>
+        <title>Search with Laravel Elasticquent!</title>
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>  
@@ -47,6 +47,7 @@
                                 @foreach($vehicles as $key => $value)
                                     <h3 class="text-danger"><?php echo ++$i .'. '?>{{ $value['brand_model'] }}</h3>
                                     <ul>
+                                        <li>Tipe :{{ $value['body_name'] }}</li>
                                         <li>Kota :{{ $value['city_name'] }}</li>
                                         <li>Warna :{{ $value['color'] }}</li>
                                         <li>Kondisi :{{ $value['condition'] }}</li>
@@ -62,7 +63,7 @@
             </div>
             <script>
                 $(document).ready(function() {
-                    src = "{{ route('searchajax') }}";
+                    src = "{{ route('api.searchajax') }}";
                     $("#q").autocomplete({
                         source: function(request, response) {
                             $.ajax({

@@ -18,10 +18,34 @@ class SearchController extends Controller
         $search = null;
         if($request->has('q')) {
             $search = $request->get('q');
+            $search = strtolower($search);
             $query =  [
-                'match'=>[
-                    '_all' => $search,
-                ]
+                'bool'=>[
+                    'should'=>[
+                        [
+                            'multi_match' => [
+                                'query' => $search,
+                                'fields' =>[
+                                    'brand_model^5',
+                                    'brand_name',
+                                    'model_name',
+                                    'body_name'
+                                ],
+                                'operator' => 'or',         
+                            ],
+                        ],
+                        [
+                            'wildcard'=>[
+                                'model_name'=>"*$search*"
+                            ],
+                        ],
+                        [
+                            'wildcard'=>[
+                                'body_name'=>"*$search*"
+                            ],
+                        ], 
+                    ],
+                ],
             ];  
             $aggregationQuery = 
             [
@@ -47,15 +71,58 @@ class SearchController extends Controller
     }
     
     public function autoComplete(Request $request) {
-        $query = $request->get('term','');
-        $vehicles=Vehicle::where('brand_model','LIKE','%'.$query.'%')->get();
+        $search = $request->get('term','');
+        $search = strtolower($search);
+        $query = [
+            'bool'=>[
+                'should'=>[
+                    [
+                        'multi_match'=>[
+                            'query'=>$search,
+                            'fields'=>[
+                                'body_name',
+                                'brand_name',
+                                'model_name'
+                            ],
+                            'operator' => 'or',
+                        ],
+                    ],
+                    [
+                        'wildcard'=>[
+                            'body_name'=>"*$search*",
+                        ],  
+                    ],
+                    [
+                        'wildcard'=>[
+                            'brand_name'=>"*$search*",
+                        ],  
+                    ],
+                    [
+                        'wildcard'=>[
+                            'model_name'=>"*$search*",
+                        ],  
+                    ],        
+                ],
+            ],
+        ];
+        $vehicles = Vehicle::searchByQuery($query);  
         $data = array();
+        $body_name = array();
+        $brand_name = array();
+        $model_name = array();
         foreach ($vehicles as $vehicle) {
-                $data[]=array('value'=>$vehicle->brand_model ,'id'=>$vehicle->_id);
+            $body_name[]=array('value'=>$vehicle->body_name);
+            $brand_name[]=array('value'=>$vehicle->brand_name);
+            $model_name[]=array('value'=>$vehicle->model_name);
         }
-        if(count($data))
-             return $data;
-        else
-            return ['value'=>'','id'=>''];
+        $data = array_merge(array_merge($body_name,$brand_name), $model_name);
+        $result_merge = array_unique($data, SORT_REGULAR);
+        $result_filter = array_filter($result_merge, function ($item) use ($search) {
+            if (strripos($item['value'], $search, 0) !== false) {
+                return true;
+            }
+            return false;
+        });
+        return response()->json($result_filter);
     }
 }
