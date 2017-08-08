@@ -18,25 +18,15 @@ Route::get('/', function () {
 Route::resource('books', 'BookController');
 
 Route::get('/elasticsearch', ['as' => 'search', 'uses' => function() {
-  // Check if user has sent a search query
-
   if($query = Input::get('query', false)) {
-    // Use the Elasticquent search method to search ElasticSearch
-//   $client = ClientBuilder::create()->build();
     $params = [
         'match' => [
             'title' => $query
         ]
     ];
-    // $books = Book::search($query);
     $books = Book::searchByQuery($params);
   } else {
     $books = Book::all();
   }
   return View::make('elasticquent/bookindex', compact('books'));
-
 }]);
-
-Route::get('/search', function(){
-    return view('search', ['vehicles'=>vehicle::all()]);
-});

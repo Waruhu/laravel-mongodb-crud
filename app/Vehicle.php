@@ -46,10 +46,6 @@ class Vehicle extends Eloquent
                         'word_delimiter',
                     ],
                 ],
-                'folding'=>[
-                        'tokenizer' => 'standard',
-                        "filter"=>  [ "lowercase", "asciifolding" ]
-                ],
             ],
             'normalizer'=>[
                 'lowerasciinormalizer' => [
@@ -96,8 +92,7 @@ class Vehicle extends Eloquent
                 'type' => 'keyword'
         ],
         'city_name' => [
-                'type' => 'keyword',
-                "normalizer"=> "lowerasciinormalizer"
+                'type' => 'keyword'
         ],
         'location_search' => [
                 'type' => 'text'
@@ -171,8 +166,6 @@ class Vehicle extends Eloquent
             'transmission'     => $this->transmission,
             'variant'     => $this->variant,
             'year'     => $this->year,
-        //     'created_at'     => $this->created_at,
-        //     'updated_at'     => $this->updated_at,
             'location_search'     => $this->brand_model,
             'model_name'     => $this->model,
             'model_name_search'     => $this->model,
@@ -186,7 +179,6 @@ class Vehicle extends Eloquent
     {
         return 'vehicles';
     }
-
     
     /*
     //this function to solve this error:

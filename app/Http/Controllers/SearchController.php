@@ -97,4 +97,9 @@ class SearchController extends Controller
         $vehicles = Vehicle::searchByQuery($query, $aggregationQuery);
         return $vehicles;
     }
+
+    public function show($id){
+        $vehicle = Vehicle::findOrFail($id);
+        return view('vehicle', compact('vehicle'));
+    }
 }

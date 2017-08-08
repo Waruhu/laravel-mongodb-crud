@@ -34,4 +34,10 @@ Route::group(['middleware' => ['web']], function () {
         'as'=>'api.searchajax',
         'uses'=>'SearchController@autoComplete'
     ]);
+    
 });
+
+Route::get('searchview/{id}',[
+        'as'=>'api.searchview',
+        'uses'=>'SearchController@show'
+    ]);

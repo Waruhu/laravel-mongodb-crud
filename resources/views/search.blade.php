@@ -27,6 +27,7 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-3">
                     @if(!empty($vehiclesAggreagation))
+                    
                     <h4 class="text-danger">Color :</h4>
                         @foreach($vehiclesAggreagation as $key => $data)
                         <ul>
@@ -43,23 +44,33 @@
                     <div id="products" class="row list-group">
                         <div class="col-lg-12">
                             @if(!empty($vehicles))
+                            <div itemscope itemtype="http://schema.org/Vehicle">
                             <?php $i=0;?>
                                 @foreach($vehicles as $key => $value)
-                                    <h3 class="text-danger"><?php echo ++$i .'. '?>{{ $value['brand_model'] }}</h3>
-                                    <ul>
-                                        <li>Tipe :{{ $value['body_name'] }}</li>
-                                        <li>Kota :{{ $value['city_name'] }}</li>
-                                        <li>Warna :{{ $value['color'] }}</li>
-                                        <li>Kondisi :{{ $value['condition'] }}</li>
-                                        <li>Price :Rp.{{ $value['price'] }}</li>
-                                        <li>Tag :{{ $value['caption'] }}</li>
-                                    </ul>
-                                    <p>{{ $value['description'] }}</p>
+                                <div class="col-md-12">
+                                    <h3 class="text-danger" itemprop="brand"><?php echo ++$i .'. '?><a href="{{ route('api.searchview', ['id' => $value{'_id'}])}}">{{ $value['brand_model'] }}</a></h3>
+                                    <div class="col-md-5">
+                                        <p itemprop="description">{{ $value['description'] }}</p>
+                                        <ul>
+                                            <li itemprop="name">Tipe :{{ $value['body_name'] }}</li>
+                                            <li>Kota :{{ $value['city_name'] }}</li>
+                                            <li>Warna :{{ $value['color'] }}</li>
+                                            <li>Kondisi :{{ $value['condition'] }}</li>
+                                            <li>Price :Rp.{{ $value['price'] }}</li>
+                                            <li>Tag :{{ $value['caption'] }}</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <img src="{{ URL::to('/') }}/images/{{ 'mobil.jpg' }}" alt="{{ 'Mobil Termahal' }}" />
+                                    </div>
+                                    
+                                    
+                                </div>
                                 @endforeach
                             @else
                                 <h3 class="text-danger">{{ $error['error'] }}</h3>
+                                </div>
                             @endif
-                            
                         </div>
                     </div>
                 </div>
@@ -80,7 +91,7 @@
                                 }
                             });
                         },
-                        minLength: 0,
+                        minLength: 1,
                     });
                 });
             </script>
