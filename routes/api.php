@@ -24,3 +24,20 @@ Route::put('articles/{id}', 'ArticleController@update');
 Route::delete('articles/{id}', 'ArticleController@destroy');
 
 Route::resource('members', 'MemberController');
+
+Route::group(['middleware' => ['web']], function () {
+    Route::get('/search', [
+        'as' => 'api.search',
+        'uses' => 'SearchController@search'
+    ]);
+    Route::get('searchajax',[
+        'as'=>'api.searchajax',
+        'uses'=>'SearchController@autoComplete'
+    ]);
+    
+});
+
+Route::get('searchview/{id}',[
+        'as'=>'api.searchview',
+        'uses'=>'SearchController@show'
+    ]);
