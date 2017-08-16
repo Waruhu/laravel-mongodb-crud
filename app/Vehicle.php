@@ -59,7 +59,9 @@ class Vehicle extends Eloquent
     protected $mappingProperties = [
         'id' => [
                 'type' => 'string',
-                'analyzer' => 'default'
+                'analyzer' => 'default',
+                'fielddata' => true,
+
         ],
         'model_name' => [
                 'type' => 'keyword',

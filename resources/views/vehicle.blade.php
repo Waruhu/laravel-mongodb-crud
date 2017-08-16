@@ -73,7 +73,7 @@
                     <p><strong>Color: </strong><span itemprop="color">{{ $vehicle['color'] }}</span></p>
                     <p><strong>Machine Capacity: </strong><span itemprop="fuelCapacity">{{ $vehicle['machine_capacity'] }}</span></p>
                     <p itemprop="description">{{ $vehicle['description'] }}</p>
-                    <img itemprop="image" src="http://3a55bb91.ngrok.io/images/mobil.jpg" />
+                    <img itemprop="image" src="{{ URL::to('/') }}/images/{{ 'mobil.jpg' }}" />
                     
                   </div>
                 </div>

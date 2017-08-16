@@ -32,12 +32,20 @@ Route::group(['middleware' => ['web']], function () {
     ]);
     Route::get('searchajax',[
         'as'=>'api.searchajax',
-        'uses'=>'SearchController@autoComplete'
+        'uses'=>'SearchController@ajaxAutoComplete'
+    ]);
+    Route::get('searchview/{id}',[
+        'as'=>'api.searchview',
+        'uses'=>'SearchController@show'
+    ]);
+    Route::post('/loadByAjax',[
+        'as' => 'api.loadByAjax',
+        'uses' => 'SearchController@loadByAjax'
+    ]);
+    Route::get('filter/filterAjax',[
+        'as' => 'api.filterAjax',
+        'uses' => 'SearchController@filterAjax'
     ]);
     
 });
 
-Route::get('searchview/{id}',[
-        'as'=>'api.searchview',
-        'uses'=>'SearchController@show'
-    ]);
