@@ -9,18 +9,18 @@
 
 <!-- Search Engine -->
 <meta name="description" content="{{ $vehicle['description'] }}">
-<meta name="image" content="http://3a55bb91.ngrok.io/images/mobil.jpg">
+<meta name="image" content="http://426ce2f9.ngrok.io/images/mobil.jpg">
 
 <!-- Schema.org for Google -->
 <meta itemprop="name" content="{{ $vehicle['brand'] }}">
 <meta itemprop="description" content="{{ $vehicle['description'] }}">
-<meta itemprop="image" content="http://3a55bb91.ngrok.io/images/mobil.jpg">
+<meta itemprop="image" content="http://426ce2f9.ngrok.io/images/mobil.jpg">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="{{ $vehicle['brand'] }}">
 <meta name="twitter:description" content="{{ $vehicle['description'] }}">
-<meta name="twitter:image:src" content="http://3a55bb91.ngrok.io/images/mobil.jpg">
+<meta name="twitter:image:src" content="http://426ce2f9.ngrok.io/images/mobil.jpg">
 <meta name="twitter:data1" content="{{ $vehicle['price'] }}">
 <meta name="twitter:label1" content="PRICE">
 <meta name="twitter:data2" content="{{ $vehicle['city_name'] }}">
@@ -32,9 +32,9 @@
 <meta property="og:title" content="{{ $vehicle['brand'] }}">
 <meta property="og:type" content="product">
 <meta property="og:description" content="{{ $vehicle['description'] }}">
-<meta property="og:image:src" content="http://3a55bb91.ngrok.io/images/mobil.jpg">
-<meta property="og:url" content="https://3a55bb91.ngrok.io/api/searchview/5975d31b5250e13f3e11dc8e">
-<meta property="og:site_name" content="http://3a55bb91.ngrok.io">
+<meta property="og:image:src" content="http://426ce2f9.ngrok.io/images/mobil.jpg">
+<meta property="og:url" content="http://426ce2f9.ngrok.io/api/searchview/5975d31b5250e13f3e11dc8e">
+<meta property="og:site_name" content="http://426ce2f9.ngrok.io">
 <meta property="og:locale" content="en_GB" />
 
  <!-- <meta name="fb:admins" content="100006319181647"> -->
@@ -69,12 +69,14 @@
                 <!-- Car Details -->
                   <div id="product" itemprop="itemOffered" itemscope itemtype="http://schema.org/Vehicle">
                     <strong itemprop="name">{{ $vehicle['body_type'] }}</strong>
-                    <strong itemprop="brand">{{ $vehicle['brand'] }}</strong>
+                    <strong>Brand Name:</strong>
+                    <strong itemprop="brand">{{ $vehicle['brand'] }}</strong></p>
+                    <strong>Model Name:</strong>
+                    <strong itemprop="model">{{ $vehicle['model'] }}</strong>
                     <p><strong>Color: </strong><span itemprop="color">{{ $vehicle['color'] }}</span></p>
                     <p><strong>Machine Capacity: </strong><span itemprop="fuelCapacity">{{ $vehicle['machine_capacity'] }}</span></p>
                     <p itemprop="description">{{ $vehicle['description'] }}</p>
                     <img itemprop="image" src="{{ URL::to('/') }}/images/{{ 'mobil.jpg' }}" />
-                    
                   </div>
                 </div>
               </div>

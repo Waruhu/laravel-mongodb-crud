@@ -9,6 +9,7 @@
                                 <p itemprop="description">{{ $vehicle['description'] }}</p>
                                     <ul>
                                         <li itemprop="name">Tipe :{{ $vehicle['body_name'] }}</li>
+                                        <li itemprop="year">Tipe :{{ $vehicle['year'] }}</li> 
                                         <li>Kota :{{ $vehicle['city_name'] }}</li>
                                         <li>Warna :{{ $vehicle['color'] }}</li>
                                         <li>Kondisi :{{ $vehicle['condition'] }}</li>

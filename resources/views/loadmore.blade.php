@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Laravel infinite scroll pagination</title>
+	<title>Vehicle Search</title>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <link href="http://demo.expertphp.in/css/jquery.ui.autocomplete.css" rel="stylesheet">
     <script src="http://demo.expertphp.in/js/jquery.js"></script>
@@ -30,7 +30,7 @@
                     <br>
                     {{ csrf_field() }}
                     {!! Form::open(['method' => 'get', 'url' =>  route('api.search')]) !!}
-                    {!! Form::text('q', "", array('placeholder' => 'Search brand name or model name','class' => 'form-control','id'=>'q')) !!}
+                    {!! Form::text('q', "", array('placeholder' => 'Cari mobil idamanmu disini','class' => 'form-control','id'=>'q')) !!}
                     {{ Form:: close() }}
                 </div>
             </div>
