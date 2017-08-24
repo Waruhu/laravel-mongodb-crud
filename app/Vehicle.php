@@ -59,7 +59,9 @@ class Vehicle extends Eloquent
     protected $mappingProperties = [
         'id' => [
                 'type' => 'string',
-                'analyzer' => 'default'
+                'analyzer' => 'default',
+                'fielddata' => true,
+
         ],
         'model_name' => [
                 'type' => 'keyword',
@@ -80,7 +82,8 @@ class Vehicle extends Eloquent
                 'normalizer'=> 'lowerasciinormalizer'
         ],
         'brand_model' => [
-                'type' => 'keyword'
+                'type' => 'keyword',
+                'normalizer'=> 'lowerasciinormalizer'
         ],
         'province_id' => [
                 'type' => 'keyword'
@@ -171,7 +174,7 @@ class Vehicle extends Eloquent
             'model_name_search'     => $this->model,
             'brand_name'     => $this->brand,
             'body_name'     => $this->body_name,
-            'brand_model'     => $this->brand_model,
+            'brand_model'     => $this->brand .' ' .$this->model,
         );
     }
 

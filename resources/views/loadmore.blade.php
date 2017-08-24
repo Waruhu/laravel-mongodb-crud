@@ -15,39 +15,6 @@
 		    padding: 10px 0px;
 		    width: 100%;
   		}
-          .itemconfiguration
-        {
-            height: 150px;
-            width: 215px;
-            overflow: auto;
-            float: left;
-            position: relative;
-            margin-left: -5px;
-        }
-        .left_contentlist{
-        width:215px;
-        float:left;
-        padding:0 0 0 5px;
-        position:relative;
-        float:left;
-        border-right: 1px #f8f7f3 solid;
-        /* background-image:url(images/bubble.png); */
-        /* background-color: black; */
-        }
-        .txtbox{
-            display: block;
-            float: left;
-            height:35px;
-            width: 1000px;
-        }
-
-        .btncls{
-            display: block;
-            float: left;
-            height: 40px;
-            margin: -1px -2px -2px;
-            width: 80px;
-        }
   	</style>
 </head>
 <body>
@@ -62,32 +29,29 @@
                 <div class="form-group">
                     <br>
                     {{ csrf_field() }}
-                    {!! Form::open(['method' => 'get', 'url' =>  route('api.searchVehicle')]) !!}
+                    {!! Form::open(['method' => 'get', 'url' =>  route('api.search')]) !!}
                     {!! Form::text('q', "", array('placeholder' => 'Cari mobil idamanmu disini','class' => 'form-control','id'=>'q')) !!}
-                    <!-- <input type="text" name="q" id='q' value="{{ Input::old('q')}}" placeholder="search text here" class="txtbox" />
-                    <input type="submit" value=" Search "  class="btncls" /> -->
                     {{ Form:: close() }}
                 </div>
             </div>
             <div class="col-sm-3">
-                <div class="left_contentlist">
-                    <div class="brands-name">
-                        <h3>Brands</h3>
-                        <div class="itemconfiguration" style="padding-left: 30px;">
+                <div class="left-sidebar">
+                    <div class="brands_products"><!--brands_products-->
+                        <div class="brands-name">
+                              <h2>Brands</h2>
                                 <ul class="nav nav-pills nav-stacked">
                                     @if(!empty($vehiclesAggreagationBrand))
                                         @foreach($vehiclesAggreagationBrand as $key => $value)
-                                            <li class="brandLi"><input type="checkbox" id="brandId" value="{{$value['key']}}" class="brands" name="brand[]"/>
+                                            <li class="brandLi"><input type="checkbox" id="brandId" value="{{$value['key']}}" class="try" name="brand[]"/>
                                             <span>{{$value['key']}}{{' ('}}{{$value['doc_count']}}{{')'}}</span>
                                         @endforeach
                                     @endif
                                </ul>
                         </div>
-                    </div>
-                    
-                    <div class="colors-name">
-                        <h3>Colors</h3>
-                        <div class="itemconfiguration" style="padding-left: 30px;">
+                    </div><!--/brands_products-->
+                    <div class="colors_products"><!--brands_products-->
+                        <div class="colors-name">
+                              <h2>Colors</h2>
                                 <ul class="nav nav-pills nav-stacked">
                                     @if(!empty($vehiclesAggreagationColor))
                                         @foreach($vehiclesAggreagationColor as $key => $value)
@@ -97,21 +61,7 @@
                                     @endif
                                </ul>
                         </div>
-                    </div>
-
-                    <div class="cities-name">
-                        <h3>Location</h3>
-                        <div class="itemconfiguration" style="padding-left: 30px;">
-                                <ul class="nav nav-pills nav-stacked">
-                                    @if(!empty($vehiclesAggreagationCities))
-                                        @foreach($vehiclesAggreagationCities as $key => $value)
-                                            <li class="brandLi"><input type="checkbox" id="cityId" value="{{$value['key']}}" class="cities" name="location[]"/>
-                                            <span>{{$value['key']}}{{' ('}}{{$value['doc_count']}}{{')'}}</span>
-                                        @endforeach
-                                    @endif
-                               </ul>
-                        </div>
-                    </div>
+                    </div><!--/brands_products-->
                 </div>
             </div>
 
@@ -120,13 +70,12 @@
                 @if(!empty($vehicles))
                     @foreach($vehicles as $vehicle)
                     <div class="col-md-12">
-                        <h3 class="text-danger" itemprop="brand"><a href="{{ route('api.searchview', ['id' => $vehicle{'_id'}])}}">{{ $vehicle['year'] }}{{' '}}{{ $vehicle['brand_model'] }}</a></h3>
+                        <h3 class="text-danger" itemprop="brand"><a href="{{ route('api.searchview', ['id' => $vehicle{'_id'}])}}">{{ $vehicle['brand_model'] }}</a></h3>
                     </div>
                             <div class="col-md-7">
                                 <p itemprop="description">{{ $vehicle['description'] }}</p>
                                     <ul>
                                         <li itemprop="name">Tipe :{{ $vehicle['body_name'] }}</li>
-                                        <li itemprop="year">Tipe :{{ $vehicle['year'] }}</li> 
                                         <li>Kota :{{ $vehicle['city_name'] }}</li>
                                         <li>Warna :{{ $vehicle['color'] }}</li>
                                         <li>Kondisi :{{ $vehicle['condition'] }}</li>
@@ -139,13 +88,9 @@
                             </div>
                     @endforeach
                     <br>
-                    @if(!empty($vehicle))
                     <div id="remove-row">
-                        <button id="btn-more" data-id="{{ $vehicle['id'] }}" class="nounderline btn-block mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" > Load More </button>
+                        <button id="btn-more" data-id="{{ $vehicle->id }}" class="nounderline btn-block mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" > Load More </button>
                     </div>
-                    @else
-                        <h3 class="text-danger">{{ $error['error'] }}</h3>
-                    @endif
             @else
                 <h3 class="text-danger">{{ $error['error'] }}</h3>
             @endif
@@ -172,19 +117,12 @@
                      color.push(colors[i].value);
                 }
                 Finalcolor  = color.toString();
-                var city = [];
-                var cities = $('input[name="location[]"]:checked');
-                var len = cities.length;
-                for (var i=0; i<len; i++) {
-                     city.push(cities[i].value);
-                }
-                Finalcity  = city.toString();
                 $("#btn-more").html("Loading....");
-                src = "{{ route('api.searchVehicle') }}";
+                src = "{{ route('api.loadByAjax') }}";
                 $.ajax({
                     url : src,
-                    method : "get",
-                    data : {lastId:id, q:q, brand:Finalbrand, color:Finalcolor, location : Finalcity, _token:"{{csrf_token()}}"},
+                    method : "POST",
+                    data : {id:id, q:q, brand:Finalbrand, color:Finalcolor, _token:"{{csrf_token()}}"},
                     dataType : "text",
                     success : function (data)
                     {
@@ -222,21 +160,15 @@
         });
 
         $(function () {
-            $('.cities').click(function(){
-                var cities = [];
-                $('.cities').each(function(){
+            $('.try').click(function(){
+                var brand = [];
+                $('.try').each(function(){
                     if($(this).is(":checked")){
-                        cities.push($(this).val());
+                        brand.push($(this).val());
                     }
                 });
-                Finalcity  = cities.toString();
-                var brand = [];
-                var brands = $('input[name="brand[]"]:checked');
-                var len = brands.length;
-                for (var i=0; i<len; i++) {
-                     brand.push(brands[i].value);
-                }
                 Finalbrand  = brand.toString();
+
                 var color = [];
                 var colors = $('input[name="color[]"]:checked');
                 var len = colors.length;
@@ -245,12 +177,12 @@
                 }
                 Finalcolor  = color.toString();
                 var q = $('#q').val();
-                src = "{{ route('api.searchVehicle') }}";
+                src = "{{ route('api.filterAjax') }}";
                 $.ajax({
                     type: 'get',
                     dataType: 'html',
                     url: src,
-                    data: {location : Finalcity, color : Finalcolor, brand : Finalbrand, q:q},
+                    data: {brand : Finalbrand, color : Finalcolor, q:q},
                     success: function (response) {
                         console.log(response);
                         $('#load-data').html(response);
@@ -273,56 +205,13 @@
                      brand.push(brands[i].value);
                 }
                 Finalbrand  = brand.toString();
-                var city = [];
-                var cities = $('input[name="location[]"]:checked');
-                var len = cities.length;
-                for (var i=0; i<len; i++) {
-                     city.push(cities[i].value);
-                }
-                Finalcity  = city.toString();
                 var q = $('#q').val();
-                src = "{{ route('api.searchVehicle') }}";
+                src = "{{ route('api.filterAjax') }}";
                 $.ajax({
                     type: 'get',
                     dataType: 'html',
                     url: src,
-                    data: {location : Finalcity, color : Finalcolor, brand : Finalbrand, q:q},
-                    success: function (response) {
-                        console.log(response);
-                        $('#load-data').html(response);
-                    }
-                });
-            });
-
-            $('.brands').click(function(){
-                var brands = [];
-                $('.brands').each(function(){
-                    if($(this).is(":checked")){
-                        brands.push($(this).val());
-                    }
-                });
-                Finalbrand  = brands.toString();
-                var color = [];
-                var colors = $('input[name="color[]"]:checked');
-                var len = colors.length;
-                for (var i=0; i<len; i++) {
-                     color.push(colors[i].value);
-                }
-                Finalcolor  = color.toString();
-                var city = [];
-                var cities = $('input[name="location[]"]:checked');
-                var len = cities.length;
-                for (var i=0; i<len; i++) {
-                     city.push(cities[i].value);
-                }
-                Finalcity  = city.toString();
-                var q = $('#q').val();
-                src = "{{ route('api.searchVehicle') }}";
-                $.ajax({
-                    type: 'get',
-                    dataType: 'html',
-                    url: src,
-                    data: {location : Finalcity, color : Finalcolor, brand : Finalbrand, q:q},
+                    data: {color : Finalcolor, brand : Finalbrand, q:q},
                     success: function (response) {
                         console.log(response);
                         $('#load-data').html(response);

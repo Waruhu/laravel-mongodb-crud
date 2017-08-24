@@ -30,3 +30,5 @@ Route::get('/elasticsearch', ['as' => 'search', 'uses' => function() {
   }
   return View::make('elasticquent/bookindex', compact('books'));
 }]);
+
+Route::get('/vehicle/find/{id}', 'VehicleController@findVehicleById');
